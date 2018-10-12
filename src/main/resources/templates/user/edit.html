@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+    <form action="../user/updateUser" method="post" >
+    
+    <table border="1">
+    	<tr th:each="list : ${user}">
+    	    <td><input type="hidden" name="userId"  th:value="${list.userId}"/></td>
+
+			<td>用户名</td>
+			<td ><input type="text" name="userName" value="" th:value="${list.userName}"/></td>
+		  </tr>	
+		   
+		  <tr>
+			<td>生日</td>
+			<td><input type="date" name="birthday" value="" th:value="${user.birthday}"/></td>
+		  </tr>
+		 <!-- <tr>
+			<td>性别</td>
+			<td>
+			<input type="radio" name="sex" value="1" ${user.sex==1 ? 'checked' : ''/>男 
+			<input type="radio" name="sex" value="2" ${user.sex==2 ? 'checked' : ''/>女
+			</td>
+		  </tr> -->
+		  <!-- <tr>
+			<td>状态</td>
+			<td>
+				<input type="radio" name="status" value="1" ${user.status==1 ? 'checked' : '' />已上市
+				<input type="radio" name="status" value="2" ${user.status==2 ? 'checked' : '' />未上市 
+			</td>
+		  </tr> -->
+		  <!--<tr>
+			<td>账号</td>
+			<td><input type="text" name="loginnumber" value="" th:value="${user.loginnumber}"/></td>
+		  </tr>-->
+		  <tr>
+			<td>密码</td>
+			<td><input type="text" name="password" value="" th:value="${user.password}"/></td>
+		  </tr>
+		  <!-- <tr>
+			<td>角色</td>
+			<td>
+				<select name="roleid">
+					 <option value="1" ${user.roleid==1 ? 'selected' : '' }>普通会员</option>
+					<option value="2" ${user.roleid==2 ? 'selected' : '' }>高级会员</option>
+					<option value="3" ${user.roleid==3 ? 'selected' : '' }>顶级会员</option> 
+				</select>
+			</td>
+		 </tr>  -->
+		  <tr>
+			<td><input type="submit"/></td>
+			<td><input type="reset"/></td>
+		  </tr>
+
+  </table>
+  </form>
+</body>
+</html>

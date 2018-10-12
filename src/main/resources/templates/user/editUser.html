@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="addForm">
+		<table>
+			<tr>
+				<td>姓名</td>
+				<td>
+					<input name="name" class="easyui-textbox" style="width:200px" th:value="${u.name}"/>
+					<input type="hidden" name="id" th:value="${u.id}">
+				</td>
+			</tr><tr>
+				<td>账号</td>
+				<td>
+					<input name="loginnumber" class="easyui-textbox" data-options="iconCls:'icon-man'" style="width:200px" th:value="${u.loginnumber}"/>
+				</td>
+			</tr>
+			<tr>
+				<td>密码</td>
+				<td>
+					<input name="password" type="password" class="easyui-textbox" data-options="iconCls:'icon-lock'" style="width:200px"  th:value="${u.password}"/>
+				</td>
+			</tr>
+			<tr>
+				<td>手机号</td>
+				<td>
+					<input name="phoneNumber"  class="easyui-textbox" data-options="iconCls:'icon-lock'" style="width:200px"  th:value="${u.phoneNumber}"/>
+				</td>
+			</tr>
+			<tr>
+				<td>性别</td>
+				<td>
+					<input type="radio" name="sex" value="1" th:checked="${u.sex} eq 1"/>男
+					<input type="radio" name="sex" value="0"  th:checked="${u.sex} eq 0"/>女
+				</td>
+			</tr>
+		<!-- 	<tr>
+				<td>角色</td>
+				<td>
+				<div id="userListTable">
+				</div>
+					<select  class="easyui-combobox" id="userListTable" name="rolename" data-options="multiple:true,multiline:true" style="width:200px;height:50px" th:value="${u.rolename}">
+				
+					</select>
+				</td>
+			</tr> -->
+			<tr>
+				<td>状态</td>
+				<td>
+					<input type="radio" name="status" value="1"  th:checked="${u.status} eq 1"/>已选
+					<input type="radio" name="status" value="2"  th:checked="${u.status} eq 2"/>未选
+				</td>
+			</tr>
+		</table>
+	</form>
+	<script src="../js/edituser.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		initUpdateUser();
+})
+
+function initUpdateUser(){
+$.ajax({
+	url:'/user/selectRole',
+	type:'post',
+	data:{id:$('#x').val()},
+	dataType:'json',
+	success:function(result){
+		var html = "";
+		var x=""
+		var role = result.role;
+		var roles = result.roles;
+		for(var i=0;i<role.length;i++){
+			for(var j=0;j<roles.length;j++){
+				if(roles[j].id==role[i].id){
+					x= "<input type='checkbox' checked name='roleId' value="+role[i].rid+" />"+role[i].rname+"<br/>";
+					break;
+				}else{
+					x= "<input type='checkbox' name='roleId' value="+role[i].rid+" />"+role[i].rname+"<br/>";
+				}
+				
+			}
+			html+=x;
+		}
+		$('#userListTable').html(html);
+	}
+})
+}
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>springboot</title>
+</head>
+
+<body>
+      <table border="1">
+         <tr>
+           <td>编号</td>
+           <td>生日</td>
+
+           <td>密码</td>
+
+           <td>性别</td>
+
+           <td>用户名</td>
+           <td>操作</td>
+         </tr>
+      <tr th:each="user:${list}">
+            <td th:text="${user.userId}"></td>
+           <td th:text="${user.birthday}"></td>
+
+           <td th:text="${user.password}"></td>
+           <td th:text="${user.sex}"></td>
+
+           <td th:text="${user.userName}"></td>
+           <td>
+             <a href="../user/toAddUser">新增</a>
+             <!-- <a href="" th:href="'../user/editUser?userId='+${user.userId}">修改</a> -->
+             <input type="button" value="修改"  th:onclick="'editUser(\''+${user.userId}+'\')'"/>
+             <input type="button" value="删除"  th:onclick="'delUser(\''+${user.userId}+'\')'"/>
+           </td>
+      </tr>
+      </table>
+      
+      <script type="text/javascript">
+      function delUser(userId){
+               location.href="../user/deleteUser?userId="+userId;
+        }
+      function editUser(userId){
+               location.href="../user/editUser?userId="+userId;
+        }
+      
+      
+      </script>
+</body>
+</html>
